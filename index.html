@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallet Liquidation | Premium Wholesale Pallets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a2a4d;
+            --secondary: #e63946;
+            --accent: #f1c40f;
+            --light: #f8f9fa;
+            --dark: #121212;
+            --gray: #6c757d;
+            --transition: all 0.4s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Header with fade effect */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(26, 42, 77, 0.9) 0%, rgba(26, 42, 77, 0.7) 50%, rgba(26, 42, 77, 0.4) 80%, transparent 100%);
+            padding: 15px 0;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.scrolled {
+            background: rgba(26, 42, 77, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .logo-icon:hover {
+            transform: rotate(10deg);
+            color: #ffd700;
+        }
+
+        /* Header actions (login and cart) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 20px;
+        }
+        
+        .action-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .action-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn .icon {
+            font-size: 1.2rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile header actions */
+        .mobile-header-actions {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+            margin-right: 15px;
+        }
+
+        /* Hero section with dynamic background */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 42, 77, 0.8), rgba(18, 18, 18, 0.9));
+            z-index: -1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-bg.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #e6b30e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Features section */
+        .features {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Products section */
+        .products {
+            padding: 100px 20px;
+            background: #f8f9fa;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* NEW: Trending Products Section */
+        .trending {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #f8f9fa, #eef2f7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trending::before {
+            content: 'TRENDING';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(26, 42, 77, 0.03);
+            white-space: nowrap;
+            z-index: 0;
+        }
+        
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .trending-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .trending-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .trending-img {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .trending-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .trending-card:hover .trending-img img {
+            transform: scale(1.05);
+        }
+        
+        .trending-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .trending-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .trending-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .trending-category {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .trending-price {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 5px 0 15px;
+        }
+        
+        .trending-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .trending-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .trending-stats i {
+            color: var(--accent);
+        }
+        
+        .add-to-cart {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .add-to-cart input {
+            width: 60px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .add-to-cart button {
+            flex-grow: 1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .add-to-cart button:hover {
+            background: #0d1a33;
+        }
+        
+        .add-to-cart button.added {
+            background: var(--secondary);
+        }
+        
+        .add-to-cart button.added::after {
+            content: '✓ Added';
+        }
+
+        /* How It Works Section */
+        .features#how-it-works {
+            background-color: #eef2f7;
+        }
+
+        /* Testimonials Section */
+        .features#testimonials {
+            background: white;
+        }
+
+        /* CTA section */
+        .cta {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary), #0d1a33);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 20px 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile menu styles */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: white;
+            z-index: 1001;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .trending::before {
+                font-size: 4rem;
+                left: -30px;
+            }
+            
+            .header-actions {
+                gap: 10px;
+                margin-left: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: rgba(26, 42, 77, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 80px 20px 20px;
+                transition: right 0.4s ease;
+                z-index: 1000;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul li a {
+                padding: 15px;
+                font-size: 1.2rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .features {
+                padding: 70px 20px;
+            }
+            
+            .trending::before {
+                display: none;
+            }
+            
+            .header-actions {
+                display: none; /* Hide desktop actions on mobile */
+            }
+            
+            .mobile-header-actions {
+                display: flex; /* Show mobile actions on mobile */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .mobile-header-actions {
+                gap: 8px;
+            }
+            
+            .action-btn {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .logo-text {
+                display: none; /* Hide logo text on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with fade effect -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-pallet"></i>
+                </div>
+                <span class="logo-text">PalletLiquid</span>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#products"><i class="fas fa-box-open"></i> Products</a></li>
+                    <li><a href="#trending"><i class="fas fa-fire"></i> Trending</a></li>
+                    <li><a href="#how-it-works"><i class="fas fa-info-circle"></i> How It Works</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-star"></i> Testimonials</a></li>
+                    <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Desktop Header actions (login and cart) -->
+            <div class="header-actions">
+                <div class="action-btn" id="loginBtn" title="Login">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                
+                <div class="action-btn" id="cartBtn" title="Cart">
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="cart-count">3</div>
+                </div>
+            </div>
+            
+            <!-- Mobile Header actions (login and cart) -->
+            <div class="mobile-header-actions">
+                <div class="action-btn" id="mobileLoginBtn" title="Login">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                
+                <div class="action-btn" id="mobileCartBtn" title="Cart">
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="cart-count">3</div>
+                </div>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero section with dynamic background -->
+    <section class="hero">
+        <div class="hero-bg active" id="bg1"></div>
+        <div class="hero-bg" id="bg2"></div>
+        <div class="hero-bg" id="bg3"></div>
+        <div class="hero-bg" id="bg4"></div>
+        
+        <div class="hero-content">
+            <h1>Premium Liquidation Pallets at Wholesale Prices</h1>
+            <p>Discover huge savings on customer returns, overstock, and shelf-pull merchandise from top retailers</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn btn-primary">View Available Pallets</a>
+                <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Why Choose Our Service</h2>
+            <p>We provide the best liquidation experience for resellers and retailers</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Fast Nationwide Shipping</h3>
+                <p>Get your pallets delivered to your door anywhere in the US within 3-7 business days.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <h3>Save Up To 90%</h3>
+                <p>Massive discounts on brand-name merchandise compared to retail prices.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Quality Guaranteed</h3>
+                <p>Every pallet comes with a detailed manifest and quality inspection report.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>No Membership Fees</h3>
+                <p>Buy liquidation pallets without monthly fees or minimum purchase requirements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Featured Pallets</h2>
+            <p>Browse our current liquidation inventory</p>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Electronics Pallet">
+                </div>
+                <div class="product-info">
+                    <h3>Electronics Pallet</h3>
+                    <div class="product-price">$1,200 - $1,800</div>
+                    <p class="product-description">Mixed electronics including laptops, tablets, smartphones, and accessories.</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Home Goods Pallet">
+                </div>
+                <div class="product-info">
+                    <h3>Home Goods Pallet</h3>
+                    <div class="product-price">$900 - $1,400</div>
+                    <p class="product-description">Kitchen appliances, home decor, bedding, and household essentials.</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Apparel Pallet">
+                </div>
+                <div class="product-info">
+                    <h3>Apparel Pallet</h3>
+                    <div class="product-price">$800 - $1,200</div>
+                    <p class="product-description">Mixed clothing, shoes, and accessories from major brands and retailers.</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- NEW: Trending Products Section -->
+    <section class="trending" id="trending">
+        <div class="section-title">
+            <h2>Hot Trending Items</h2>
+            <p>Popular products our customers are adding to their carts</p>
+        </div>
+        
+        <div class="trending-grid">
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Smart Watch">
+                    <div class="trending-badge">BEST SELLER</div>
+                </div>
+                <div class="trending-info">
+                    <h3>Smart Watch Series 5</h3>
+                    <div class="trending-category">Electronics</div>
+                    <div class="trending-price">$89.99</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.8 (142)</span>
+                        <span><i class="fas fa-fire"></i> 85 sold</span>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="number" value="1" min="1">
+                        <button>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80" alt="Wireless Headphones">
+                    <div class="trending-badge">NEW</div>
+                </div>
+                <div class="trending-info">
+                    <h3>Wireless Noise-Cancelling Headphones</h3>
+                    <div class="trending-category">Audio</div>
+                    <div class="trending-price">$74.99</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.6 (89)</span>
+                        <span><i class="fas fa-fire"></i> 63 sold</span>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="number" value="1" min="1">
+                        <button>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1789&q=80" alt="Kitchen Set">
+                </div>
+                <div class="trending-info">
+                    <h3>10-Piece Non-Stick Cookware Set</h3>
+                    <div class="trending-category">Home & Kitchen</div>
+                    <div class="trending-price">$129.99</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.7 (204)</span>
+                        <span><i class="fas fa-fire"></i> 112 sold</span>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="number" value="1" min="1">
+                        <button>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trending-card">
+                <div class="trending-img">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Running Shoes">
+                    <div class="trending-badge">LIMITED STOCK</div>
+                </div>
+                <div class="trending-info">
+                    <h3>Men's Running Shoes</h3>
+                    <div class="trending-category">Footwear</div>
+                    <div class="trending-price">$49.99</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.9 (312)</span>
+                        <span><i class="fas fa-fire"></i> 240 sold</span>
+                    </div>
+                    <div class="add-to-cart">
+                        <input type="number" value="1" min="1">
+                        <button>
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="features" id="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Simple process to get liquidation pallets</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent);">1</div>
+                </div>
+                <h3>Browse Pallets</h3>
+                <p>Explore our inventory of liquidation pallets with detailed manifests and photos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent);">2</div>
+                </div>
+                <h3>Place Order</h3>
+                <p>Select the pallets you want and complete your secure online purchase.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent);">3</div>
+                </div>
+                <h3>Fast Shipping</h3>
+                <p>We prepare and ship your order within 1-2 business days via freight.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent);">4</div>
+                </div>
+                <h3>Receive & Resell</h3>
+                <p>Get your pallets, inspect the merchandise, and start reselling for profit!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="features" id="testimonials">
+        <div class="section-title">
+            <h2>Customer Testimonials</h2>
+            <p>What our customers say about us</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" style="text-align: left;">
+                <div class="testimonial-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <div class="testimonial-avatar" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px;">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h3>Michael Johnson</h3>
+                        <div style="color: var(--accent);">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-style: italic; position: relative; padding-left: 20px;">
+                    "I've purchased three pallets so far and each one has exceeded my expectations. The manifest was accurate and the products were in much better condition than I anticipated. Will definitely buy again!"
+                </p>
+            </div>
+            
+            <div class="feature-card" style="text-align: left;">
+                <div class="testimonial-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <div class="testimonial-avatar" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px;">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h3>Sarah Williams</h3>
+                        <div style="color: var(--accent);">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-style: italic; position: relative; padding-left: 20px;">
+                    "As a small business owner, these liquidation pallets have been a game-changer. The profit margins are excellent and the shipping was faster than expected. Customer service is top-notch too!"
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Start Reselling?</h2>
+            <p>Join thousands of satisfied customers who are building profitable businesses with our liquidation pallets.</p>
+            <a href="#products" class="btn btn-primary">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Pallet Liquidation</h3>
+                <p>Your trusted source for premium liquidation pallets at wholesale prices.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#trending">Trending</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Product Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Home Goods</a></li>
+                    <li><a href="#">Apparel</a></li>
+                    <li><a href="#">Toys & Games</a></li>
+                    <li><a href="#">Tools & Hardware</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Commerce St, Business City</li>
+                    <li><i class="fas fa-phone"></i> (800) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@palletliquidation.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM EST</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Pallet Liquidation. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            
+            // Change icon
+            const icon = menuToggle.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    mainNav.classList.remove('active');
+                    menuToggle.querySelector('i').classList.remove('fa-times');
+                    menuToggle.querySelector('i').classList.add('fa-bars');
+                    
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll for features and products
+        const animatedElements = document.querySelectorAll('.feature-card, .product-card, .trending-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(element);
+        });
+
+        // Dynamic Hero Background Switching
+        const backgrounds = [
+            'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+            'https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1664&q=80',
+            'https://images.unsplash.com/photo-1603732551658-5fabbafa84eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+            'https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1776&q=80'
+        ];
+
+        // Set initial backgrounds
+        document.getElementById('bg1').style.backgroundImage = `url('${backgrounds[0]}')`;
+        document.getElementById('bg2').style.backgroundImage = `url('${backgrounds[1]}')`;
+        document.getElementById('bg3').style.backgroundImage = `url('${backgrounds[2]}')`;
+        document.getElementById('bg4').style.backgroundImage = `url('${backgrounds[3]}')`;
+
+        // Background switching logic
+        const bgElements = document.querySelectorAll('.hero-bg');
+        let currentBg = 0;
+        
+        function changeBackground() {
+            // Remove active class from current background
+            bgElements[currentBg].classList.remove('active');
+            
+            // Move to next background
+            currentBg = (currentBg + 1) % bgElements.length;
+            
+            // Add active class to new background
+            bgElements[currentBg].classList.add('active');
+        }
+        
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
+        
+        // Add to Cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart button');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.innerHTML;
+                this.classList.add('added');
+                this.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+                
+                // Update cart count
+                const cartCount = document.querySelectorAll('.cart-count');
+                cartCount.forEach(countElement => {
+                    let count = parseInt(countElement.textContent);
+                    countElement.textContent = count + 1;
+                });
+                
+                // Visual feedback for cart button
+                const cartBtns = document.querySelectorAll('#cartBtn, #mobileCartBtn');
+                cartBtns.forEach(btn => {
+                    btn.style.animation = 'pulse 0.5s';
+                    setTimeout(() => {
+                        btn.style.animation = '';
+                    }, 500);
+                });
+                
+                setTimeout(() => {
+                    this.classList.remove('added');
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+        
+        // Login button functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            alert('Login functionality would open here!\nYou would be able to sign in or create an account.');
+        });
+        
+        document.getElementById('mobileLoginBtn').addEventListener('click', function() {
+            alert('Login functionality would open here!\nYou would be able to sign in or create an account.');
+        });
+        
+        // Cart button functionality
+        document.getElementById('cartBtn').addEventListener('click', function() {
+            alert('Cart functionality would open here!\nYou would see all items in your cart and proceed to checkout.');
+        });
+        
+        document.getElementById('mobileCartBtn').addEventListener('click', function() {
+            alert('Cart functionality would open here!\nYou would see all items in your cart and proceed to checkout.');
+        });
+    </script>
+</body>
+</html>
